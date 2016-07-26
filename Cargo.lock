@@ -1,0 +1,11 @@
+[root]
+name = "rust"
+version = "0.1.0"
+dependencies = [
+ "core 0.0.0",
+]
+
+[[package]]
+name = "core"
+version = "0.0.0"
+
