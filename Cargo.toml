@@ -1,5 +1,5 @@
 [package]
-name = "rust"
+name = "rust-on-bbc-microbit"
 version = "0.1.0"
 authors = ["Simon Sapin <simon.sapin@exyr.org>"]
 
@@ -8,6 +8,3 @@ crate-type = ["staticlib"]
 
 [dependencies]
 core = {path = "/home/simon/projects/rust1/src/libcore"}
-#alloc = {path = "/home/simon/projects/rust1/src/liballoc"}
-#collections = {path = "/home/simon/projects/rust1/src/libcollections"}
-#rustc_unicode = {path = "/home/simon/projects/rust1/src/librustc_unicode"}

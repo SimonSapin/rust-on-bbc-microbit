@@ -1,5 +1,5 @@
 [root]
-name = "rust"
+name = "rust-on-bbc-microbit"
 version = "0.1.0"
 dependencies = [
  "core 0.0.0",

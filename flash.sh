@@ -18,7 +18,7 @@ arm-none-eabi-g++ \
     -T$MICROBIT_TARGET/ld/NRF51822.ld \
     -Wl,--start-group \
     $MBED_CMSIS/TARGET_NORDIC/TARGET_MCU_NRF51822/TOOLCHAIN_GCC_ARM/startup_NRF51822.S \
-    target/cortex-m0/release/librust.a \
+    target/cortex-m0/release/librust_on_bbc_microbit.a \
     -lnosys \
     -lstdc++ \
     -lsupc++ \
@@ -38,4 +38,5 @@ srec_cat \
     $MICROBIT_TARGET/softdevice/s110_nrf51822_8.0.0_softdevice.hex -intel \
     target/hex -intel \
     -o target/combined.hex -intel
+echo Flashing…
 cp target/combined.hex /run/media/simon/MICROBIT/
