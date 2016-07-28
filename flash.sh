@@ -27,7 +27,7 @@ arm-none-eabi-g++ \
     -mthumb \
     -T$MICROBIT_TARGET/ld/NRF51822.ld \
     -Wl,--start-group \
-    $MBED_CLASSIC/build/bbc-microbit-classic-gcc/existing/mbed-classic.a \
+    $MBED_CLASSIC/targets/cmsis/TARGET_NORDIC/TARGET_MCU_NRF51822/TOOLCHAIN_GCC_ARM/startup_NRF51822.S \
     target/cortex-m0/release/librust.a \
     -lnosys \
     -lstdc++ \

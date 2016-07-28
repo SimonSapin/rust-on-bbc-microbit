@@ -1,15 +1,21 @@
 #![no_std]
-#![feature(lang_items)]
+#![feature(lang_items, asm)]
 
 #[lang = "eh_personality"] extern fn eh_personality() {}
 #[lang = "panic_fmt"] extern fn panic_fmt() -> ! { loop {} }
 
+#[allow(non_snake_case)]
+#[no_mangle]
+pub extern fn SystemInit() {}
+
+#[allow(non_snake_case)]
+#[no_mangle]
+pub unsafe extern fn __wrap_main() {
+    main()
+}
+
 const PERIOD_MS: u32 = 1000;
 const ON_MS: u32 = 50;
-
-extern {
-    fn wait_ms(ms: u32);
-}
 
 #[no_mangle]
 pub unsafe extern fn main() -> ! {
@@ -18,9 +24,9 @@ pub unsafe extern fn main() -> ! {
     row_2.set_high();
     loop {
         col_3.set_low();
-        wait_ms(ON_MS);
+        wait_approx_ms(ON_MS);
         col_3.set_high();
-        wait_ms(PERIOD_MS - ON_MS);
+        wait_approx_ms(PERIOD_MS - ON_MS);
     }
 }
 
@@ -70,4 +76,19 @@ struct NRF_GPIO_Type {
     DIRCLR: u32,                            /* DIR clear register. */
     RESERVED_1: [u32; 120],
     PIN_CNF: [u32; 32],                       /* Configuration of GPIO pins. */
+}
+
+fn wait_approx_ms(ms: u32) {
+    for i in 0..ms {
+        for j in 0..1500 {
+            black_box((i, j));
+        }
+    }
+}
+
+fn black_box<T>(dummy: T) -> T {
+    // we need to "use" the argument in some way LLVM can't
+    // introspect.
+    unsafe { asm!("" : : "r"(&dummy)) }
+    dummy
 }
