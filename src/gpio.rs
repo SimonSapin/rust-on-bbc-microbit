@@ -1,14 +1,17 @@
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+pub struct PinNumber(pub u8);
+
 pub struct Pin {
     mask: u32,
 }
 
 impl Pin {
-    pub fn new(number: usize) -> Self {
+    pub fn new(number: PinNumber) -> Self {
         unsafe {
-            (*GPIO_BASE).PIN_CNF[number] = GPIO_PIN_CNF_DIR_Output;
+            (*GPIO_BASE).PIN_CNF[number.0 as usize] = GPIO_PIN_CNF_DIR_Output;
         }
         Pin {
-            mask: 1 << number,
+            mask: 1 << number.0,
         }
     }
 

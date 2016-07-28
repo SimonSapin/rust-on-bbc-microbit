@@ -4,14 +4,15 @@
 pub mod boilerplate;  // Public to export symbols to the linker
 mod gpio;
 mod busy_loop;
+mod pins;
 
 const PERIOD_MS: u32 = 1000;
 const ON_MS: u32 = 50;
 
 #[no_mangle]
 pub unsafe extern fn main() -> ! {
-    let row_2 = gpio::Pin::new(14);
-    let col_3 = gpio::Pin::new(6);
+    let row_2 = gpio::Pin::new(pins::ROW_2);
+    let col_3 = gpio::Pin::new(pins::COL_3);
     row_2.set_high();
     loop {
         col_3.set_low();
