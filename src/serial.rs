@@ -62,12 +62,18 @@ impl fmt::Write for Serial {
 
 #[macro_export]
 macro_rules! print {
-    ($($arg:tt)*) => (write!($crate::serial::Serial, $($arg)*).unwrap())
+    ($($arg:tt)*) => {
+        use core::fmt::Write;
+        write!($crate::serial::Serial, $($arg)*).unwrap()
+    }
 }
 
 #[macro_export]
 macro_rules! println {
-    ($($arg:tt)*) => (writeln!($crate::serial::Serial, $($arg)*).unwrap())
+    ($($arg:tt)*) => {
+        use core::fmt::Write;
+        writeln!($crate::serial::Serial, $($arg)*).unwrap()
+    }
 }
 
 const BAUDRATE_9600_BAUD: u32 = 0x00275000;
