@@ -9,7 +9,6 @@ pub fn wait_approx_ms(ms: u32) {
     }
 }
 
-
 // Copied from https://github.com/rust-lang/rust/blob/f5d79521a/src/libtest/lib.rs#L1204
 fn black_box<T>(dummy: T) -> T {
     // we need to "use" the argument in some way LLVM can't

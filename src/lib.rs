@@ -5,16 +5,24 @@ pub mod boilerplate;  // Public to export symbols to the linker
 mod gpio;
 mod busy_loop;
 mod pins;
+#[macro_use] mod serial;
+
+use core::fmt::Write;
+use serial::Serial;
 
 const PERIOD_MS: u32 = 1000;
 const ON_MS: u32 = 50;
 
 #[no_mangle]
 pub unsafe extern fn main() -> ! {
-    let row_2 = gpio::Pin::new(pins::ROW_2);
-    let col_3 = gpio::Pin::new(pins::COL_3);
+    Serial::init();
+    let row_2 = gpio::Pin::output(pins::ROW_2);
+    let col_3 = gpio::Pin::output(pins::COL_3);
     row_2.set_high();
+    let mut uptime: u32 = 0;
     loop {
+        println!("Uptime: {}", uptime);
+        uptime += 1;
         col_3.set_low();
         busy_loop::wait_approx_ms(ON_MS);
         col_3.set_high();

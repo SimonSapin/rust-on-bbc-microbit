@@ -9,5 +9,7 @@
     "target-pointer-width": "32",
     "cpu": "cortex-m0",
     "llvm-target": "thumbv6m-none-eabi",
+    "features": "+strict-align",
+    "relocation-model": "static",
     "no-compiler-rt": true
 }

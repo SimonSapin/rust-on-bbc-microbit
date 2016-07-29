@@ -1,17 +1,35 @@
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct PinNumber(pub u8);
 
+impl PinNumber {
+    fn mask(&self) -> u32 {
+        1 << self.0
+    }
+
+    pub fn input_pullup(&self) {
+        unsafe {
+            (*GPIO_BASE).PIN_CNF[self.0 as usize] = CONFIG_INPUT | CONFIG_PULLUP;
+        }
+    }
+
+    pub fn output_pullup(&self) {
+        unsafe {
+            (*GPIO_BASE).PIN_CNF[self.0 as usize] = CONFIG_OUTPUT | CONFIG_PULLUP;
+        }
+    }
+}
+
 pub struct Pin {
     mask: u32,
 }
 
 impl Pin {
-    pub fn new(number: PinNumber) -> Self {
+    pub fn output(number: PinNumber) -> Self {
         unsafe {
-            (*GPIO_BASE).PIN_CNF[number.0 as usize] = GPIO_PIN_CNF_DIR_Output;
+            (*GPIO_BASE).PIN_CNF[number.0 as usize] = CONFIG_OUTPUT;
         }
         Pin {
-            mask: 1 << number.0,
+            mask: number.mask(),
         }
     }
 
@@ -29,8 +47,9 @@ impl Pin {
 }
 
 
-#[allow(non_upper_case_globals)]
-const GPIO_PIN_CNF_DIR_Output: u32 = 1;
+#[allow(non_upper_case_globals)] const CONFIG_INPUT: u32 = 0 << 0;
+#[allow(non_upper_case_globals)] const CONFIG_OUTPUT: u32 = 1 << 0;
+#[allow(non_upper_case_globals)] const CONFIG_PULLUP: u32 = 3 << 2;
 
 const GPIO_BASE: *mut NRF_GPIO_Type = 0x50000000 as *mut _;
 
