@@ -24,6 +24,5 @@ pub unsafe extern fn main() -> ! {
         busy_loop::wait_approx_ms(ON_MS);
         col_3.set_high();
         busy_loop::wait_approx_ms(PERIOD_MS - ON_MS);
-        assert_eq!(4, 42);
     }
 }
