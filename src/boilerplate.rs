@@ -15,13 +15,3 @@ extern fn panic_fmt(details: ::core::fmt::Arguments, file: &'static str, line: u
         ::busy_loop::wait_approx_ms(200);
     }
 }
-
-#[allow(non_snake_case)]
-#[no_mangle]
-pub extern fn SystemInit() {}
-
-#[allow(non_snake_case)]
-#[no_mangle]
-pub unsafe extern fn __wrap_main() {
-    ::main()
-}

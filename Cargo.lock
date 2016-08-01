@@ -1,11 +1,4 @@
 [root]
 name = "rust-on-bbc-microbit"
 version = "0.1.0"
-dependencies = [
- "core 0.0.0",
-]
-
-[[package]]
-name = "core"
-version = "0.0.0"
 

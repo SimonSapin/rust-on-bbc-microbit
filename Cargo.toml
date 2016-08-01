@@ -7,4 +7,3 @@ authors = ["Simon Sapin <simon.sapin@exyr.org>"]
 crate-type = ["staticlib"]
 
 [dependencies]
-core = {path = "/home/simon/projects/rust1/src/libcore"}

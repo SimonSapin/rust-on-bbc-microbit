@@ -168,8 +168,6 @@ Reset_Handler:
     bgt    .LC1
 .LC0:
     
-    LDR     R0, =SystemInit
-    BLX     R0
     LDR     R0, =_start
     BX      R0
 
