@@ -1,6 +1,6 @@
 # Rust on BBC micro:bit
 
-This is where a play with BBC’s [micro:bit](https://www.microbit.co.uk/about)
+This is where I play with BBC’s [micro:bit](https://www.microbit.co.uk/about)
 and put some [Rust](http://rust-lang.org/) code on it.
 
 It’s a tiny board with an ARM micro-controller and a bunch of peripherals on it.
