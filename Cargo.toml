@@ -1,9 +1,0 @@
-[package]
-name = "rust-on-bbc-microbit"
-version = "0.1.0"
-authors = ["Simon Sapin <simon.sapin@exyr.org>"]
-
-[lib]
-crate-type = ["staticlib"]
-
-[dependencies]
